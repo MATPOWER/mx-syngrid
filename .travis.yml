@@ -26,7 +26,7 @@ install:
 env:
   global:
     - IPOPT_VER=3.11.9
-    - MATPOWER_PATH=$TRAVIS_BUILD_DIR/matpower/lib
+    - MATPOWER_PATH=$TRAVIS_BUILD_DIR/matpower
     - SYNGRID_PATH=$TRAVIS_BUILD_DIR/lib:$TRAVIS_BUILD_DIR/lib/t
     - SEARCH_PATH=$SYNGRID_PATH:$MATPOWER_PATH
 
@@ -41,7 +41,9 @@ script:
 
 - octave-cli --no-gui --eval ver
 - octave-cli --no-gui --eval "addpath('$TRAVIS_BUILD_DIR/build/ipopt'); savepath"
-- octave-cli --no-gui --eval "install_matpower(1,1,1)"
+- octave-cli --no-gui -p $MATPOWER_PATH --eval "install_matpower(1,1,1)"
+- octave-cli --no-gui --eval "addpath('$TRAVIS_BUILD_DIR/lib'); savepath"
+- octave-cli --no-gui --eval "addpath('$TRAVIS_BUILD_DIR/lib/t'); savepath"
 - octave-cli --no-gui --eval mpver
 - octave-cli --no-gui --eval "test_syngrid(0,1)"
 # print IPOPT version number
