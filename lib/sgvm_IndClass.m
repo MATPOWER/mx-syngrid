@@ -58,7 +58,7 @@ classdef sgvm_IndClass < handle
             %         obj = sgvm_IndClass(obj.mpc, 'branch', obj.gen, opt);
               case 'branch'
                 obj.call = 'branch';
-                [~, nviolations] = checkoverloads(mpc);
+                [~, nviolations] = obj._checkoverloads(mpc);
                 if nviolations < 15
                   obj.overload_frac = max(0.80, opt.vm.branchperm.overload_frac_factor*obj.overload_frac);
                 else
@@ -81,7 +81,7 @@ classdef sgvm_IndClass < handle
                 if opt.vm.nodeperm.verbose > 0 && ~opt.vm.parallel.use
                   fprintf('\t(child of %s)---Time stats:\n', obj.pid(1:6));
                 end
-                [~, nviolations] = checkoverloads(mpc);
+                [~, nviolations] = obj._checkoverloads(mpc);
                 if nviolations < 10
                   opt.vm.nodeperm.usedv = true;
                   obj.scale_s = max(0.75, opt.vm.nodeperm.scale_s_factor*obj.scale_s);
@@ -365,7 +365,7 @@ classdef sgvm_IndClass < handle
             if nargin < 2
               level = 1;
             end
-            ind = checkoverloads(obj.mpc);
+            ind = obj._checkoverloads(obj.mpc);
             if level > 1
               define_constants;
               % check voltage constraints
@@ -440,7 +440,7 @@ classdef sgvm_IndClass < handle
                 if opt.vm.shunts.verbose > 0
                     fprintf('  Ind %s (child of %s): sgvm_add_shunts complete.\n', obj.id(1:6), obj.pid(1:6));
                 end
-                if (branch_violations(r) == 0) || (cnt > 5)
+                if (obj._branch_violations(r) == 0) || (cnt > 5)
                     if isfield(r, 'softlims')
                         r = rmfield(r, 'softlims');
                     end
@@ -490,7 +490,7 @@ classdef sgvm_IndClass < handle
                     obj.scale_s = 1;
                     obj.overload_frac = 1;
                     permcnt = permcnt + 1;
-                    [nviolations, idx] = branch_violations(obj.mpc);
+                    [nviolations, idx] = obj._branch_violations(obj.mpc);
                     if strcmp(obj.call, 'branch')
                         type = 'node';
                     elseif strcmp(obj.call, 'node')
@@ -549,48 +549,47 @@ classdef sgvm_IndClass < handle
             fprintf('------------|------------|------------|------------|\n')
             fprintf('%11d |%11.4f |%11.4f |%11.4f |\n', [idx, sf, st, ra].')
         end
-    end
-end
 
-%% ------ LOCAL FUNCTIONS -----------
-function [bool, nviolations] = checkoverloads(mpc)
-    % checks if mpc satisfies all the necessary constraint.
+        %% ------  private methods  -----------
+        function [bool, nviolations] = _checkoverloads(obj, mpc)
+            % checks if mpc satisfies all the necessary constraint.
 
-    if isfield(mpc, 'softlims')
-        if isfield(mpc.softlims, 'RATE_A')
-          nviolations = sum(mpc.softlims.RATE_A.overload > 1e-4);
-        else
-          nviolations = branch_violations(mpc);
+            if isfield(mpc, 'softlims')
+                if isfield(mpc.softlims, 'RATE_A')
+                  nviolations = sum(mpc.softlims.RATE_A.overload > 1e-4);
+                else
+                  nviolations = obj._branch_violations(mpc);
+                end
+                if isfield(mpc.softlims, 'PMAX') && ~strcmp(mpc.softlims.PMAX.hl_mod, 'none')
+                  genoverload = sum(mpc.softlims.PMAX.overload > 1e-4);
+                else
+                  genoverload = obj._gen_violations(mpc);
+                end
+            else
+                nviolations = obj._branch_violations(mpc);
+                genoverload = obj._gen_violations(mpc);
+            end
+            bool =  (nviolations == 0) && (genoverload == 0);
+            bool = bool && mpc.success;
         end
-        if isfield(mpc.softlims, 'PMAX') && ~strcmp(mpc.softlims.PMAX.hl_mod, 'none')
-          genoverload = sum(mpc.softlims.PMAX.overload > 1e-4);
-        else
-          genoverload = gen_violations(mpc);
+
+        function [nviolations, idx] = _branch_violations(obj, mpc)
+
+            define_constants;
+            Sf = sqrt(mpc.branch(:,PF).^2 + mpc.branch(:,QF).^2);
+            St = sqrt(mpc.branch(:,PT).^2 + mpc.branch(:,QT).^2);
+            %maximum apparent flow on branch in per-unit
+            S  = max(Sf,St) / mpc.baseMVA;
+            % line ratings in per-unit
+            ra  = mpc.branch(:,RATE_A) / mpc.baseMVA;
+            ra(ra == 0) = Inf;
+
+            nviolations = sum(S > (ra + 1e-4));
+            idx = find(S > (ra + 1e-4));
         end
-    else
-        nviolations = branch_violations(mpc);
-        genoverload = gen_violations(mpc);
-    end
-    bool =  (nviolations == 0) && (genoverload == 0);
-    bool = bool && mpc.success;
-end
 
-function [nviolations, idx] = branch_violations(mpc)
-
-    define_constants;
-    Sf = sqrt(mpc.branch(:,PF).^2 + mpc.branch(:,QF).^2);
-    St = sqrt(mpc.branch(:,PT).^2 + mpc.branch(:,QT).^2);
-    %maximum apparent flow on branch in per-unit
-    S  = max(Sf,St) / mpc.baseMVA;
-    % line ratings in per-unit
-    ra  = mpc.branch(:,RATE_A) / mpc.baseMVA;
-    ra(ra == 0) = Inf;
-
-    nviolations = sum(S > (ra + 1e-4));
-    idx = find(S > (ra + 1e-4));
-end
-
-function genoverload = gen_violations(mpc)
-  define_constants;
-  genoverload = sum(mpc.gen(:,PG) > mpc.gen(:,PMAX) + 1e-4);
+        function genoverload = _gen_violations(obj, mpc)
+          define_constants;
+          genoverload = sum(mpc.gen(:,PG) > mpc.gen(:,PMAX) + 1e-4);
+        end    end
 end

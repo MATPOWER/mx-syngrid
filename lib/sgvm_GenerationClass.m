@@ -102,7 +102,7 @@ classdef sgvm_GenerationClass < handle
                         continue
                     end
                     % for each individuals perform permutation niter times
-                    tmp = evolve_children(obj.inds{k}, niter, type, gen, opt);
+                    tmp = obj._evolve_children(obj.inds{k}, niter, type, gen, opt);
                     chldr{k} = tmp;
                 end
             else
@@ -112,7 +112,7 @@ classdef sgvm_GenerationClass < handle
                   continue
                 end
                 % for each individuals perform permutation niter times
-                tmp = evolve_children(tmpinds{k}, niter, type, gen, opt);
+                tmp = obj._evolve_children(tmpinds{k}, niter, type, gen, opt);
                 chldr{k} = tmp;
               end
             end
@@ -297,50 +297,50 @@ classdef sgvm_GenerationClass < handle
             end
             sgvm_collection_stats(obj, field);
         end
+
+        %% ------  private methods  -----------
+        function chldr = _evolve_children(obj, parent, niter, type, gen, opt)
+            % for each individual perform permutation
+            % niter times
+
+            chldr = cell(1,niter);
+            breakflag = false;
+            for h = 1:niter
+                if parent.solcheck()
+                  if h == 1
+                      chldr{h} = sgvm_IndClass(parent, type, gen, opt);
+                  elseif chldr{h-1}.solcheck()
+                      chldr{h} = sgvm_IndClass(chldr{h-1}, type, gen, opt);
+                  else
+                      chldr{h} = sgvm_IndClass(parent.mpc, 'init', gen, opt);
+                  end
+                else
+                  chldr{h} = sgvm_IndClass(parent.mpc, 'init', gen, opt);
+                end
+
+            %     if chldr{h}.iscomplete() && strcmp(type, 'branch')
+            %         % check whether child satisfies all constraints
+            %         breakflag = true;
+            %     end
+
+                if h > 1
+                  if chldr{h-1}.comp_perm(chldr{h})
+                    % permutation didn't change
+                    chldr{h} = [];
+                    breakflag = true;
+                  end
+                else
+                  if parent.comp_perm(chldr{h})
+                    % permutation didn't change
+                    chldr{h} = [];
+                    breakflag = true;
+                  end
+                end
+                if breakflag
+                  break
+                end
+            end
+            chldr = chldr(~cellfun(@isempty, chldr));
+        end
     end
-end
-
-%% ------ LOCAL FUNCTIONS -----------
-function chldr = evolve_children(parent, niter, type, gen, opt)
-    % for each individual perform permutation
-    % niter times
-
-    chldr = cell(1,niter);
-    breakflag = false;
-    for h = 1:niter
-        if parent.solcheck()
-          if h == 1
-              chldr{h} = sgvm_IndClass(parent, type, gen, opt);
-          elseif chldr{h-1}.solcheck()
-              chldr{h} = sgvm_IndClass(chldr{h-1}, type, gen, opt);
-          else
-              chldr{h} = sgvm_IndClass(parent.mpc, 'init', gen, opt);
-          end
-        else
-          chldr{h} = sgvm_IndClass(parent.mpc, 'init', gen, opt);
-        end
-
-    %     if chldr{h}.iscomplete() && strcmp(type, 'branch')
-    %         % check whether child satisfies all constraints
-    %         breakflag = true;
-    %     end
-
-        if h > 1
-          if chldr{h-1}.comp_perm(chldr{h})
-            % permutation didn't change
-            chldr{h} = [];
-            breakflag = true;
-          end
-        else
-          if parent.comp_perm(chldr{h})
-            % permutation didn't change
-            chldr{h} = [];
-            breakflag = true;
-          end
-        end
-        if breakflag
-          break
-        end
-    end
-    chldr = chldr(~cellfun(@isempty, chldr));
 end
