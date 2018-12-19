@@ -20,8 +20,9 @@ System Requirements
 
 *   [MATPOWER][2] version 7 or later
     
-    _See the [MATPOWER website][2] for
-     the system requirements for MATPOWER._
+    _See the [MATPOWER website][2] for the system requirements for
+    MATPOWER. For use on Octave, SynGrid's variations mode requires
+    Octave 4.2 or later._
 
 
 Installation
