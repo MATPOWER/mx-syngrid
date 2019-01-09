@@ -8,7 +8,7 @@ Synthetic Grid Creation for MATPOWER
 synthetic power system models for use with [MATPOWER][2]. SynGrid is based on
 code written by Dr. Zhifang Wang and her group, including Seyyed Hamid Elyas
 and Hamidreza Sadeghian at Virginia Commonwealth University, and further
-developed as part of the ["Synthetic Data for Power Grid R~\&~D" project][3]
+developed as part of the ["Synthetic Data for Power Grid R & D" project][3]
 under the [ARPA-E Grid Data][3b] program in conjunction with Ray Zimmerman
 from Cornell University. SynGrid builds upon [previous work][] by Wang,
 Scaglione, and Thomas as well as more the more recent works listed in the
