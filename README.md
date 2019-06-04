@@ -118,28 +118,28 @@ Publications
     Power Grids,"][11] *Proceedings of the 41st Annual Hawaii International
     Conference on System Sciences (HICSS 2008)*, Waikoloa, HI, 2008,
     pp. 1-9.  
-    DOI: [10.1109/HICSS.2008.182][11]
+    doi: [10.1109/HICSS.2008.182][11]
 
 2.  Z. Wang, A. Scaglione and R. J. Thomas, ["Generating Statistically
     Correct Random Topologies for Testing Smart Grid Communication and
     Control Networks,"][7] *Smart Grid, IEEE Transactions on*, vol. 1,
     no. 1, pp. 28-39, June 2010.  
-    DOI: [10.1109/TSG.2010.2044814][7]
+    doi: [10.1109/TSG.2010.2044814][7]
 
 3.  Z. Wang and R. J. Thomas, ["On Bus Type Assignments in Random Topology
     Power Grid Models,"][12] *2015 48th Hawaii International Conference on
     System Sciences*, Kauai, HI, 2015, pp. 2671-2679.  
-    DOI: [10.1109/HICSS.2015.322][12]
+    doi: [10.1109/HICSS.2015.322][12]
 
 4.  Z. Wang, S. H. Elyas, ["On the Scaling Property of Power Grids,"][13]
     *Proceedings of the 50st Annual Hawaii International Conference on
     System Sciences (HICSS 2017)*, Waikoloa, HI, 2017, pp. 3148-3155.  
-    DOI: [10.24251/HICSS.2017.381][13]
+    doi: [10.24251/HICSS.2017.381][13]
 
 5.  S. H. Elyas and Z. Wang, ["Improved Synthetic Power Grid Modeling
     With Correlated Bus Type Assignments,"][8] *Power Systems, IEEE
     Transactions on*, vol. 32, no. 5, pp. 3391-3402, Sept. 2017.  
-    DOI: [10.1109/TPWRS.2016.2634318][8].
+    doi: [10.1109/TPWRS.2016.2634318][8].
 
 6.  S. H. Elyas, Z. Wang, R. J. Thomas, ["On the Statistical Settings of
     Generation Capacities and Dispatch in a Synthetic Grid Modeling,"][14]
@@ -157,7 +157,7 @@ Publications
 9.  E. Schweitzer, A. Scaglione, ["A Mathematical Programing Solution
     for Automatic Generation of Synthetic Power Flow Cases,"][17] *Power
     Systems, IEEE Transactions on*, 2018.  
-    DOI: [10.1109/TPWRS.2018.2863266][17]
+    doi: [10.1109/TPWRS.2018.2863266][17]
 
 
 Citing SynGrid
