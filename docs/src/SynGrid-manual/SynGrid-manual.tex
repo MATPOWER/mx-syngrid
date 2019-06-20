@@ -139,7 +139,7 @@
 
 %\hyphenation{matpower}
 
-\newcommand{\mpver}[0]{6.0}
+\newcommand{\mpver}[0]{7.0}
 %\newcommand{\matlab}[0]{{Matlab}}
 %\newcommand{\matlab}[0]{{\sc Matlab}\textsuperscript{\tiny \textregistered}}
 \newcommand{\matlab}[0]{{\sc Matlab}}
@@ -157,10 +157,10 @@
 \newcommand{\mipsurl}[0]{https://github.com/MATPOWER/mips}
 \newcommand{\mipslink}[0]{\href{\mipsurl}{\mips{}}}
 \newcommand{\mipsname}[0]{{{\bf M}{\sc atpower} \textbf{I}nterior \textbf{P}oint \textbf{S}olver}}
-\newcommand{\mipsver}[0]{1.2.2}
+\newcommand{\mipsver}[0]{1.3.1}
 
 \newcommand{\syngrid}[0]{{SynGrid}}
-\newcommand{\syngridver}[0]{1.0}
+\newcommand{\syngridver}[0]{1.0.1}
 \newcommand{\syngridurl}[0]{https://github.com/MATPOWER/mx-syngrid}
 \newcommand{\syngridlink}[0]{\href{\syngridurl}{\syngrid{}}}
 \newcommand{\syngridpath}[1]{\textsf{\textsl{{\relsize{-1.0}\textless{}\mbox{SYNGRID}\textgreater{}}}}\code{{#1}}}
@@ -185,7 +185,7 @@
 \newcommand{\most}[0]{{MOST}}
 \newcommand{\mostname}[0]{{{\bf M}{\sc atpower} \textbf{O}ptimal \textbf{S}cheduling \textbf{T}ool}}
 \newcommand{\mosturl}[0]{https://github.com/MATPOWER/most}
-\newcommand{\mostver}[0]{1.0}
+\newcommand{\mostver}[0]{1.0.2}
 \newcommand{\md}[0]{{\most{} Data struct}}
 \newcommand{\powerweb}[0]{{\sc PowerWeb}}
 \newcommand{\pserc}[0]{{\sc PSerc}}
@@ -200,7 +200,7 @@
 \newcommand{\ot}[0]{{Optimization Toolbox}}
 \newcommand{\pardiso}[0]{{PARDISO}}
 \newcommand{\sdppf}[0]{\texttt{SDP\_PF}}
-\newcommand{\sdppfver}[0]{1.0}
+\newcommand{\sdppfver}[0]{1.0.1}
 \newcommand{\sdpopf}[0]{SDPOPF}
 \newcommand{\lcb}[0]{\char '173}
 \newcommand{\rcb}[0]{\char '175}
@@ -265,7 +265,7 @@ User's Manual}
 %%% BEFORE PUBLISHING A NEW VERSION:
 %%%   Update the publication year for \bibitem{matpower} and
 %%%   \bibitem{matpower_manual} to the year of the latest release
-\date{December 18, 2018} % comment this line to display the current date
+\date{June 20, 2019} % comment this line to display the current date
 %\date{December 14, 2011\thanks{Second revision. First revision was December 13, 2011}} % comment this line to display the current date
 
 %%% BEGIN DOCUMENT
@@ -275,7 +275,7 @@ User's Manual}
 \vfill
 \begin{center}
 {\scriptsize
-\copyright~2018~individual contributors (see AUTHORS file for details)\\
+\copyright~2018, 2019~individual contributors (see AUTHORS file for details)\\
 All Rights Reserved}
 \end{center}
 
@@ -362,13 +362,13 @@ E.~Schweitzer, A.~Scaglione, ``A Mathematical Programing Solution for Automatic 
 
 The \syngrid{} User's Manual should also be cited explicitly in work that
 refers to or is derived from its content. The citation and DOI can be
-version-specific or general, as appropriate. For version 1.0, use:
+version-specific or general, as appropriate. For version 1.0.1, use:
 
 \begin{quote}
 \footnotesize
 Z.~Wang, H.~Sadeghian, S.~H. Elyas, R.~D. Zimmerman, E.~Schweitzer,
-A.~Scaglione. \syngrid{} User's Manual, Verision 1.0. 2018. [Online]. Available: \url{https://matpower.org/docs/SynGrid-manual-1.0.pdf}\\
-\doi{10.5281/zenodo.3238680}
+A.~Scaglione. \syngrid{} User's Manual, Verision 1.0.1. 2019. [Online]. Available: \url{https://matpower.org/docs/SynGrid-manual-1.0.1.pdf}\\
+\doi{10.5281/zenodo.3251099}
 \end{quote}
 For a version non-specific citation, use the following citation and DOI,
 with \emph{\textless{}YEAR\textgreater{}} replaced by the year of the most recent release:
@@ -1366,6 +1366,18 @@ The \href{https://matpower.org/docs/SynGrid-manual-1.0.pdf}{\syngrid{} 1.0 User'
 \item Initial release.
 \end{itemize}
 
+\subsection{Version 1.0.1 -- released June 20, 2019}
+\label{app:v10}
+
+The \href{https://matpower.org/docs/SynGrid-manual-1.0.1.pdf}{\syngrid{} 1.0.1 User's Manual} is available online.\footnote{\url{https://matpower.org/docs/SynGrid-manual-1.0.1.pdf}}
+
+\subsubsection*{Changes}
+\begin{itemize}
+\item Move local functions to private methods for Octave 4.2 compatibility.
+\item Add \code{CITATION} file.
+\item Other miscellaneous documentation updates, e.g. \matpower{} website links updated to \url{https://matpower.org}.
+\end{itemize}
+
 
 % %%------------------------------------------
 % \clearpage
@@ -1463,7 +1475,7 @@ The BSD 3-Clause License. [Online]. Available: \url{https://opensource.org/licen
 
 \bibitem{syngrid_manual}
 Z.~Wang, H.~Sadeghian, S.~H. Elyas, R.~D. Zimmerman, E.~Schweitzer,
-A.~Scaglione. \syngridman{}. 2018.
+A.~Scaglione. \syngridman{}. 2019.
 [Online]. Available: \url{https://matpower.org/docs/SynGrid-manual.pdf}\\
 \doi{10.5281/zenodo.3238679}
 
