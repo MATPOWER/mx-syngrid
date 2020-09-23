@@ -16,7 +16,7 @@ if nargin < 2
 end
 % rng('default')
 num_tests = 2*3*5*ntrials;
-have_ipopt = have_fcn('ipopt');
+have_ipopt = have_feature('ipopt');
 
 t_begin(num_tests, quiet);
 
