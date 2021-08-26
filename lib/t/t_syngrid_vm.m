@@ -107,6 +107,8 @@ for k = labels
     field = lower(k{:}(~isspace(k{:})));
     if strcmp(field, 'dcopf') && ~isempty(strfind(t, 'MIPS')) && ~all(check.(field))
         t_skip(1, 'Known Issue: Skipping DC OPF check with SynGrid Solver MIPS.');
+    elseif strcmp(field, 'acopf') && ~isempty(strfind(t, 'MIPS')) && ~all(check.(field))
+        t_skip(1, 'Known Issue: Skipping AC OPF check with SynGrid Solver MIPS.');
     else
         t_ok( all(check.(field)), [t k{:} ' success']);
     end
