@@ -220,8 +220,8 @@ SynGrid is distributed under the [3-clause BSD license][10].
 ----
 [1]: https://github.com/MATPOWER/mx-syngrid
 [2]: https://matpower.org
-[3]: https://arpa-e.energy.gov/?q=slick-sheet-project/synthetic-data-power-grid-rd
-[3b]: https://arpa-e.energy.gov/?q=arpa-e-programs/grid-data
+[3]: https://arpa-e.energy.gov/technologies/projects/synthetic-data-power-grid-rd
+[3b]: https://arpa-e.energy.gov/technologies/programs/grid-data
 [4]: https://github.com/MATPOWER/matpower
 [5]: https://github.com/MATPOWER/matpower-extras
 [6]: docs/SynGrid-manual.pdf
