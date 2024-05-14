@@ -52,15 +52,13 @@ Pre-release
 - Commit all changes to `prep-for-release`.
 - Push `prep-for-release` to GitHub.
 - Make sure CI checks are ok.
-
-
-  - make copy named `SynGrid-manual-x.x.pdf`
+- Make copy of `docs/SynGrid-manual.pdf` named `SynGrid-manual-x.x.pdf`
     - copy to `docs` directory of `matpower.org-static` git repo
       - update `SynGrid-manual.pdf` symlink on `https://matpower.org/docs/` to point
         to new `SynGrid-manual-x.x.pdf` (replaces existing current version)
         - `cd dev/projects/matpower.org-static/docs`
         - `rm SynGrid-manual.pdf`
-        - `ln -s ./SynGrid-manual-x.x.pdf SynGrid-manual.pdf `
+        - `ln -s ./SynGrid-manual-x.x.pdf SynGrid-manual.pdf`
       - commit & push, then pull to matpower.org
     - upload `SynGrid-manual-x.x.pdf` to Zenodo and finish entry for "New Version"
       - update:
